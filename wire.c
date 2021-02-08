@@ -14,6 +14,8 @@
  * 1.3       1997-09-24      1.2.2.0         Reprogrammed for 1.2.2   BB
  * 1.4       1997-11-25      1.2.2.0         Added language addition  Kirk
  * 1.5       1998-07-12      1.3.0.0         Fixed ;me and updated    BB
+ * 2.2       2021-02-08      1.8.4           Now also works with      Michael Ortmann
+ *                                           eggdrop 1.8.4.
  */
 /*
  * Copyright (C) 1999 - 2010 Eggheads Development Team
@@ -597,7 +599,7 @@ char *wire_start(Function *global_funcs)
 
   global = global_funcs;
 
-  module_register(MODULE_NAME, wire_table, 2, 1);
+  module_register(MODULE_NAME, wire_table, 2, 2);
   if (!module_depend(MODULE_NAME, "eggdrop", 108, 4)) {
     module_undepend(MODULE_NAME);
     return "This module requires Eggdrop 1.8.4 or later.";
