@@ -595,8 +595,6 @@ static Function wire_table[] = {
 
 char *wire_start(Function *global_funcs)
 {
-  p_tcl_bind_list H_temp;
-
   global = global_funcs;
 
   module_register(MODULE_NAME, wire_table, 2, 2);
@@ -612,9 +610,9 @@ char *wire_start(Function *global_funcs)
 
   add_help_reference("wire.help");
   add_builtins(H_dcc, wire_dcc);
-  H_temp = find_bind_table("filt");
+  find_bind_table("filt");
   add_builtins(H_filt, wire_filt);
-  H_temp = find_bind_table("chof");
+  find_bind_table("chof");
   add_builtins(H_chof, wire_chof);
   wirelist = NULL;
   add_lang_section("wire");
