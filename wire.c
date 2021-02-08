@@ -14,8 +14,6 @@
  * 1.3       1997-09-24      1.2.2.0         Reprogrammed for 1.2.2   BB
  * 1.4       1997-11-25      1.2.2.0         Added language addition  Kirk
  * 1.5       1998-07-12      1.3.0.0         Fixed ;me and updated    BB
- *
- * $Id: wire.c,v 1.2 2010/07/27 21:49:42 pseudo Exp $
  */
 /*
  * Copyright (C) 1999 - 2010 Eggheads Development Team

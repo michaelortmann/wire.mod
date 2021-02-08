@@ -1,7 +1,5 @@
 # wire.danish.lang
 #   language messages for wire module
-#
-# $Id: wire.danish.lang,v 1.1.1.1 2010/07/26 21:11:06 simple Exp $
 
 0xa000,Du er ikke på en krypteret linie.
 0xa001,For øjeblikket på krypteret linie

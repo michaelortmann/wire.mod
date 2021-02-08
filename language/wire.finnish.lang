@@ -1,7 +1,5 @@
 # wire.finnish.lang
 #   kieli tiedostot wire moduuliin
-#
-# $Id: wire.finnish.lang,v 1.1.1.1 2010/07/26 21:11:06 simple Exp $
 
 0xa000,You are not on a wire.
 0xa001,Nyky‰‰n wirella

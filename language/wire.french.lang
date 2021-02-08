@@ -2,8 +2,6 @@
 #   language messages for wire module
 #
 # Traduction par Fraggle, voir core.french.lang pour plus d'informations
-#
-# $Id: wire.french.lang,v 1.1.1.1 2010/07/26 21:11:06 simple Exp $
 
 0xa000,Vous n'êtes pas sur un wire.
 0xa001,Actuellement sur wire
