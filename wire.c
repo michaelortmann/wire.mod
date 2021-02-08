@@ -600,9 +600,9 @@ char *wire_start(Function *global_funcs)
   global = global_funcs;
 
   module_register(MODULE_NAME, wire_table, 2, 1);
-  if (!module_depend(MODULE_NAME, "eggdrop", 108, 0)) {
+  if (!module_depend(MODULE_NAME, "eggdrop", 108, 4)) {
     module_undepend(MODULE_NAME);
-    return "This module requires Eggdrop 1.8.0 or later.";
+    return "This module requires Eggdrop 1.8.4 or later.";
   }
 
   if (!(encryption_funcs = module_depend(MODULE_NAME, "encryption", 2, 1))) {
