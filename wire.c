@@ -16,6 +16,8 @@
  * 1.5       1998-07-12      1.3.0.0         Fixed ;me and updated    BB
  * 2.2       2021-02-08      1.8.4           Now also works with      Michael Ortmann
  *                                           eggdrop 1.8.4.
+ * 2.3       2022-12-12      1.8.4           egg_strcasecmp() ->      Michael Ortmann
+ *                                           strcasecmp()
  */
 /*
  * Copyright (C) 1999 - 2010 Eggheads Development Team
@@ -291,7 +293,7 @@ static int cmd_wire(struct userrec *u, int idx, char *par)
       break;
     w = w->next;
   }
-  if (!egg_strcasecmp(par, "off")) {
+  if (!strcasecmp(par, "off")) {
     if (w) {
       wire_leave(w->sock);
       dprintf(idx, "%s\n", WIRE_NOLONGERWIRED);
@@ -300,7 +302,7 @@ static int cmd_wire(struct userrec *u, int idx, char *par)
     dprintf(idx, "%s\n", WIRE_NOTONWIRE);
     return 0;
   }
-  if (!egg_strcasecmp(par, "info")) {
+  if (!strcasecmp(par, "info")) {
     if (w)
       dprintf(idx, "%s '%s'.\n", WIRE_CURRENTLYON, w->key);
     else
@@ -597,7 +599,7 @@ char *wire_start(Function *global_funcs)
 {
   global = global_funcs;
 
-  module_register(MODULE_NAME, wire_table, 2, 2);
+  module_register(MODULE_NAME, wire_table, 2, 3);
   if (!module_depend(MODULE_NAME, "eggdrop", 108, 4)) {
     module_undepend(MODULE_NAME);
     return "This module requires Eggdrop 1.8.4 or later.";
@@ -605,7 +607,7 @@ char *wire_start(Function *global_funcs)
 
   if (!(encryption_funcs = module_depend(MODULE_NAME, "encryption", 2, 1))) {
     module_undepend(MODULE_NAME);
-    return "This module requires an encryption module.";
+    return "This module requires an encryption module 2.1 or later.";
   }
 
   add_help_reference("wire.help");
