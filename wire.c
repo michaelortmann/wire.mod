@@ -18,9 +18,10 @@
  *                                           eggdrop 1.8.4.
  * 2.3       2022-12-12      1.8.4           egg_strcasecmp() ->      Michael Ortmann
  *                                           strcasecmp()
+ * 2.4       2023-03-11      1.8.4           Fix compiler warnings    Michael Ortmann
  */
 /*
- * Copyright (C) 1999 - 2010 Eggheads Development Team
+ * Copyright (C) 1999 - 2023 Eggheads Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -111,7 +112,7 @@ static void wire_filter(char *from, char *cmd, char *param)
   wire_list *w = wirelist;
   char reqsock;
   time_t now2 = now;
-  char idle[20];
+  char idle[42];
   char *enctmp;
 
   strcpy(wirecrypt, &cmd[5]);
@@ -227,7 +228,7 @@ static int cmd_onwire(struct userrec *u, int idx, char *par)
 {
   wire_list *w, *w2;
   char wiretmp[512], wirecmd[512], idxtmp[512];
-  char idle[20], *enctmp;
+  char idle[42], *enctmp;
   time_t now2 = now;
 
   w = wirelist;
@@ -249,7 +250,7 @@ static int cmd_onwire(struct userrec *u, int idx, char *par)
   enctmp = encrypt_string(w->key, dcc[idx].nick);
   strcpy(wiretmp, enctmp);
   nfree(enctmp);
-  simple_sprintf(idxtmp, "!wirereq %d %s", dcc[idx].sock, wiretmp);
+  sprintf(idxtmp, "!wirereq %ld %s", dcc[idx].sock, wiretmp);
   botnet_send_zapf_broad(-1, botnetnick, wirecmd, idxtmp);
   w2 = wirelist;
   while (w2) {
@@ -365,7 +366,7 @@ static void wire_join(int idx, char *key)
   {
     char x[1024];
 
-    simple_sprintf(x, "%s %s", botnetnick, wiretmp);
+    sprintf(x, "%s %s", botnetnick, wiretmp);
     botnet_send_zapf_broad(-1, botnetnick, wirecmd, x);
   }
   w2 = wirelist;
@@ -418,7 +419,7 @@ static void wire_leave(int sock)
   {
     char x[1024];
 
-    simple_sprintf(x, "!wire%s %s", wirecmd, botnetnick);
+    sprintf(x, "!wire%s %s", wirecmd, botnetnick);
     botnet_send_zapf_broad(-1, botnetnick, x, wiremsg);
   }
   w2 = wirelist;
@@ -473,7 +474,7 @@ static char *cmd_putwire(int idx, char *message)
   int wiretype;
   char wirecmd[512];
   char wiremsg[512];
-  char wiretmp[512];
+  char wiretmp[1024];
   char wiretmp2[512];
   char *enctmp;
 
@@ -599,7 +600,7 @@ char *wire_start(Function *global_funcs)
 {
   global = global_funcs;
 
-  module_register(MODULE_NAME, wire_table, 2, 3);
+  module_register(MODULE_NAME, wire_table, 2, 4);
   if (!module_depend(MODULE_NAME, "eggdrop", 108, 4)) {
     module_undepend(MODULE_NAME);
     return "This module requires Eggdrop 1.8.4 or later.";
