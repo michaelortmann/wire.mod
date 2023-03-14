@@ -19,6 +19,7 @@
  * 2.3       2022-12-12      1.8.4           egg_strcasecmp() ->      Michael Ortmann
  *                                           strcasecmp()
  * 2.4       2023-03-11      1.8.4           Fix compiler warnings    Michael Ortmann
+ * 2.5       2023-03-14      1.8.4           Fix off-by-one error     Michael Ortmann
  */
 /*
  * Copyright (C) 1999 - 2023 Eggheads Development Team
@@ -112,7 +113,7 @@ static void wire_filter(char *from, char *cmd, char *param)
   wire_list *w = wirelist;
   char reqsock;
   time_t now2 = now;
-  char idle[42];
+  char idle[43];
   char *enctmp;
 
   strcpy(wirecrypt, &cmd[5]);
@@ -228,7 +229,7 @@ static int cmd_onwire(struct userrec *u, int idx, char *par)
 {
   wire_list *w, *w2;
   char wiretmp[512], wirecmd[512], idxtmp[512];
-  char idle[42], *enctmp;
+  char idle[43], *enctmp;
   time_t now2 = now;
 
   w = wirelist;
@@ -600,7 +601,7 @@ char *wire_start(Function *global_funcs)
 {
   global = global_funcs;
 
-  module_register(MODULE_NAME, wire_table, 2, 4);
+  module_register(MODULE_NAME, wire_table, 2, 5);
   if (!module_depend(MODULE_NAME, "eggdrop", 108, 4)) {
     module_undepend(MODULE_NAME);
     return "This module requires Eggdrop 1.8.4 or later.";
